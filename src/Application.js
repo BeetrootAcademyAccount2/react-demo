@@ -1,14 +1,14 @@
-import Header from "./Header";
-import Main from "./Main";
-import "./App.css";
+import Landing from "./Landing";
+import Login from "./Login";
 
 function Application() {
-  return (
-    <div className="App">
-      <Header />
-      <Main />
-    </div>
-  );
+  const isLoggedIn = true;
+
+  // if (!isLoggedIn) {
+  //   return <Login />;
+  // }
+  // return <Landing />;
+  return <div>{!isLoggedIn ? <Login /> : <Landing />}</div>;
 }
 
 export default Application;

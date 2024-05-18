@@ -1,0 +1,11 @@
+$primary: pink;
+
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+
+$custom-colors: (
+  "beetroot": #a60a3d,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+@import "~bootstrap/scss/bootstrap";
