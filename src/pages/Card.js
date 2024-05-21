@@ -1,13 +1,13 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-function CardItem({ dog }) {
+function CardItem({ card }) {
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="https://picsum.photos/id/237/200/300" />
+      <Card.Img variant="top" src={card.img} />
       <Card.Body>
-        <Card.Title>{dog.name}</Card.Title>
-        <Card.Text>{dog.description}</Card.Text>
+        <Card.Title>{card.name}</Card.Title>
+        <Card.Text>{card.description}</Card.Text>
         <Button variant="primary">Adopt</Button>
       </Card.Body>
     </Card>
