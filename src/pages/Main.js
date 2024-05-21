@@ -1,6 +1,6 @@
 // import { Button } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import "./Main.scss";
+import "../styles/Main.scss";
 import CardList from "./CardList";
 
 function Main() {

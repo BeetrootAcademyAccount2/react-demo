@@ -1,5 +1,5 @@
 import CardItem from "./Card";
-import "./CardList.scss";
+import "../styles/CardList.scss";
 
 function CardList() {
   const dogs = [

@@ -1,7 +1,7 @@
 import Landing from "./Landing";
 import Login from "./Login";
 
-function Application() {
+function App() {
   const isLoggedIn = true;
 
   // if (!isLoggedIn) {
@@ -11,4 +11,4 @@ function Application() {
   return <div>{!isLoggedIn ? <Login /> : <Landing />}</div>;
 }
 
-export default Application;
+export default App;
