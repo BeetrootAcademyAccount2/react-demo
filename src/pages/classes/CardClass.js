@@ -5,43 +5,66 @@ import Card from "react-bootstrap/Card";
 class CardClass extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      cardColor: props.cardColor,
+      cardNumber: props.cardNumber,
+      card: props.card,
+    };
     console.log("CardClass Constructor");
+
+    // this.counter = 0;
+    // this.interval = setInterval(() => {
+    //   console.log(this.counter++);
+    // }, 2000);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("CardClass getDerivedStateFromProps");
-    return null;
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   console.log("CardClass getDerivedStateFromProps");
 
-  componentDidMount() {
-    console.log("CardClass componentDidMount");
-  }
+  //   console.log("Next:", nextProps);
+  //   console.log("Prev:", prevState);
 
-  shouldComponentUpdate(nextProps, prevState) {
-    console.log("CardClass shouldComponentUpdate");
-    return true;
-  }
+  //   if (nextProps.cardColor !== prevState.cardColor) {
+  //     return {
+  //       cardColor: nextProps.cardColor,
+  //       cardNumber: nextProps.cardNumber,
+  //     };
+  //   }
 
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log("CardClass getSnapshotBeforeUpdate");
+  //   return null;
+  // }
 
-    return null;
-  }
+  // componentDidMount() {
+  //   console.log("CardClass componentDidMount");
+  // }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("CardClass componentDidUpdate");
-  }
+  // shouldComponentUpdate(nextProps, prevState) {
+  //   console.log("CardClass shouldComponentUpdate");
+  //   return true;
+  // }
+
+  // getSnapshotBeforeUpdate(prevProps, prevState) {
+  //   console.log("CardClass getSnapshotBeforeUpdate");
+
+  //   return null;
+  // }
+
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   console.log("CardClass componentDidUpdate");
+  // }
 
   componentWillUnmount() {
     console.log("CardClass componentWillUnmount");
+    clearInterval(this.interval);
   }
   render() {
+    const card = this.state.card;
     return (
-      <Card style={{ width: "18rem" }}>
-        {/* <Card.Img variant="top" src={card.img} /> */}
+      <Card style={{ width: "18rem", backgroundColor: this.state.cardColor }}>
+        <Card.Img variant="top" src={card.thumbnail} />
         <Card.Body>
-          <Card.Title>Title</Card.Title>
-          <Card.Text>Description</Card.Text>
+          <Card.Title>{card.title}</Card.Title>
+          <Card.Text>{card.brand}</Card.Text>
           <Button variant="primary">Delete</Button>
         </Card.Body>
       </Card>
