@@ -21,10 +21,10 @@ class CardListClass extends React.Component {
   //   return null;
   // }
 
-  // componentDidCatch(error, info) {
-  //   console.log("Error:", error);
-  //   console.log("Info:", info);
-  // }
+  componentDidCatch(error, info) {
+    console.log("Error:", error);
+    console.log("Info:", info);
+  }
 
   componentDidMount() {
     console.log("CardListClass componentDidMount");

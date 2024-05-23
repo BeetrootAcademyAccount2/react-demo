@@ -1,7 +1,7 @@
 import CardItem from "./Card";
 import "../styles/CardList.scss";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function CardList() {
   const initialCards = [
@@ -51,20 +51,45 @@ function CardList() {
 
   const [selectedCardGroup, setSelectedCardGroup] = useState("all");
   const [counter, setCounter] = useState(0);
-  const [selectedCards, setSelectedCards] = useState(initialCards);
+  const [selectedCards, setSelectedCards] = useState([]);
+  const [error, setError] = useState(null);
 
   const handleGroupFilterClick = (group) => {
     setCounter((prevValue) => {
-      console.log(prevValue);
       return ++prevValue;
     });
     setSelectedCardGroup(group);
   };
 
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network issue");
+        }
+        return res.json();
+      })
+      .then((json) => {
+        setSelectedCards(json.products);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.toString());
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log("Selected Card Group Effect");
+  }, [selectedCardGroup]);
+
+  useEffect(() => {
+    console.log("DELETION");
+  }, [selectedCards]);
+
   const filteredCards =
     selectedCardGroup === "all"
       ? selectedCards
-      : selectedCards.filter((card) => card.group === selectedCardGroup);
+      : selectedCards.filter((card) => card.category === selectedCardGroup);
 
   const deleteCard = (cardId) => {
     setSelectedCards((cards) => cards.filter((card) => card.id !== cardId));
@@ -76,25 +101,28 @@ function CardList() {
         <Button className="m-2" onClick={() => handleGroupFilterClick("all")}>
           All
         </Button>
-        <Button className="m-2" onClick={() => handleGroupFilterClick("dogs")}>
-          Dogs
+        <Button
+          className="m-2"
+          onClick={() => handleGroupFilterClick("furniture")}
+        >
+          Furniture
         </Button>
         <Button
           className="m-2"
-          onClick={() => handleGroupFilterClick("mountains")}
+          onClick={() => handleGroupFilterClick("beauty")}
         >
-          Mountains
+          Beauty
         </Button>
         <Button
           className="m-2"
-          onClick={() => handleGroupFilterClick("towers")}
+          onClick={() => handleGroupFilterClick("groceries")}
         >
-          Towers
+          Groceries
         </Button>
       </div>
-      <ul className="CardList-list">
+      {error && <div className="text-danger">Error</div>}
+      <ul className="d-flex flex-wrap m-2 gap-3  list-unstyled">
         {filteredCards.map((card) => {
-          console.log(card);
           return (
             <li key={card.id}>
               <CardItem card={card} onDelete={deleteCard} />

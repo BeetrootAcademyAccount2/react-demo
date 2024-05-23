@@ -6,8 +6,9 @@ function CardItem({ card, onDelete }) {
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={card.img} />
       <Card.Body>
-        <Card.Title>{card.name}</Card.Title>
-        <Card.Text>{card.description}</Card.Text>
+        <Card.Img variant="top" src={card.thumbnail} />
+        <Card.Title>{card.title}</Card.Title>
+        <Card.Text>{card.brand}</Card.Text>
         <Button variant="primary" onClick={() => onDelete(card.id)}>
           Delete
         </Button>
