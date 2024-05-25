@@ -2,6 +2,7 @@ import CardItem from "./Card";
 import "../styles/CardList.scss";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function CardList() {
   const [selectedCardGroup, setSelectedCardGroup] = useState("all");
@@ -17,19 +18,29 @@ function CardList() {
   };
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network issue");
-        }
-        return res.json();
-      })
-      .then((json) => {
-        setSelectedCards(json.products);
+    // fetch("https://dummyjson.com/products")
+    //   .then((res) => {
+    //     if (!res.ok) {
+    //       throw new Error("Network issue");
+    //     }
+    //     return res.json();
+    //   })
+    //   .then((json) => {
+    //     setSelectedCards(json.products);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setError(error.toString());
+    //   });
+
+    axios
+      .get("https://dummyjson.com/products")
+      .then((response) => {
+        console.log(response);
+        setSelectedCards(response.data.products);
       })
       .catch((error) => {
-        console.log(error);
-        setError(error.toString());
+        console.log("error:", error);
       });
   }, []);
 

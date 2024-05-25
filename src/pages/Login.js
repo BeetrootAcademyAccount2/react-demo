@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import AlertMessage from "./AlertMessage";
+import axios from "axios";
 
 function Login() {
   const serverError = true;
@@ -14,6 +15,22 @@ function Login() {
     const form = event.currentTarget;
     const username = event.currentTarget.elements.username.value;
     const password = event.currentTarget.elements.password.value;
+    submit(username, password);
+  };
+
+  const submit = (username, password) => {
+    axios
+      .post("https://dummyjson.com/auth/login", {
+        username: username,
+        password: password,
+        expiresInMins: 30,
+      })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
