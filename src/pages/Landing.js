@@ -4,7 +4,6 @@ import Main from "./Main";
 function Landing() {
   return (
     <div>
-      <Header />
       <Main />
     </div>
   );

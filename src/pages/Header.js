@@ -1,24 +1,28 @@
-import "../styles/Header.css";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 
-function Header() {
-  const title = "Smaller header";
-  const bigTitle = () => {
-    return "Big Title";
-  };
-
+function Header({ setPage }) {
   return (
-    <header>
-      {/* <h1
-        style={{
-          color: "green",
-          backgroundColor: "yellow",
-        }}
-      >
-        {bigTitle()}
-      </h1> */}
-      <h1 className="bg-beetroot">Title</h1>
-      <h2 className="Header-title">{title}</h2>
-    </header>
+    <Navbar bg="primary" data-bs-theme="dark">
+      <Container>
+        <Navbar.Brand href="#home">React Demo</Navbar.Brand>
+        <Nav className="me-auto">
+          <Nav.Link href="#" onClick={() => setPage("landing")}>
+            Landing
+          </Nav.Link>
+          <Nav.Link href="#" onClick={() => setPage("login")}>
+            Login
+          </Nav.Link>
+          <Nav.Link href="#" onClick={() => setPage("register")}>
+            Register
+          </Nav.Link>
+          <Nav.Link href="#" onClick={() => setPage("info")}>
+            Info
+          </Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 }
 
