@@ -4,6 +4,8 @@ import Landing from "./Landing";
 import Login from "./Login";
 import Register from "./Register";
 import Info from "./Info";
+import React from "react";
+import { ThemeProvider } from "./context/Theme";
 
 function App() {
   //const isLoggedIn = true;
@@ -14,10 +16,10 @@ function App() {
   // return <Landing />;
   // return <div>{!isLoggedIn ? <Login /> : <Landing />}</div>;
 
-  const [page, setPage] = useState("register");
+  const [page, setPage] = useState("login");
 
   return (
-    <div>
+    <ThemeProvider>
       <Header setPage={setPage} />
       <div className="m-3">
         {page === "landing" && <Landing />}
@@ -25,7 +27,7 @@ function App() {
         {page === "register" && <Register />}
         {page === "info" && <Info />}
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

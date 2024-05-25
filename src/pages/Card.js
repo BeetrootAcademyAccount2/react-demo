@@ -1,9 +1,18 @@
+import { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { ThemeContext } from "./context/Theme";
 
 function CardItem({ card, onDelete }) {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card
+      style={{
+        width: "18rem",
+        backgroundColor: theme === "dark" ? "black" : "pink",
+      }}
+    >
       <Card.Img variant="top" src={card.img} />
       <Card.Body>
         <Card.Img variant="top" src={card.thumbnail} />
