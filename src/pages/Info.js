@@ -1,5 +1,7 @@
+import MessageForm from "./MessageForm";
+
 function Info() {
-  return <p>Info</p>;
+  return <MessageForm />;
 }
 
 export default Info;

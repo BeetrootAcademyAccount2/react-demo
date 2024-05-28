@@ -16,7 +16,7 @@ function App() {
   // return <Landing />;
   // return <div>{!isLoggedIn ? <Login /> : <Landing />}</div>;
 
-  const [page, setPage] = useState("login");
+  const [page, setPage] = useState("info");
 
   return (
     <ThemeProvider>
