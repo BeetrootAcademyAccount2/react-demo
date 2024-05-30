@@ -5,30 +5,37 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import { FaGlobe } from "react-icons/fa";
 import { ThemeContext } from "./context/Theme";
+import { NavLink } from "react-router-dom";
 
-function Header({ setPage }) {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+function Header() {
+  // const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <Navbar bg={theme === "dark" ? "dark" : "primary"} data-bs-theme="dark">
+    <Navbar bg="primary" data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="#home">React Demo</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#" onClick={() => setPage("landing")}>
+          <Nav.Link as={NavLink} to="/">
             Landing
           </Nav.Link>
-          <Nav.Link href="#" onClick={() => setPage("login")}>
+          <Nav.Link as={NavLink} to="login">
             Login
           </Nav.Link>
-          <Nav.Link href="#" onClick={() => setPage("register")}>
+          <Nav.Link as={NavLink} to="register">
             Register
           </Nav.Link>
-          <Nav.Link href="#" onClick={() => setPage("info")}>
+          <Nav.Link as={NavLink} to="info">
             Info
           </Nav.Link>
-          <Button onClick={toggleTheme} variant="outline-none">
+          <Nav.Link as={NavLink} to="non-existent">
+            No page
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="list">
+            Card List
+          </Nav.Link>
+          {/* <Button onClick={toggleTheme} variant="outline-none">
             <FaGlobe />
-          </Button>
+          </Button> */}
         </Nav>
       </Container>
     </Navbar>

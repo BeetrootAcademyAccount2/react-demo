@@ -56,7 +56,6 @@ function MessageForm() {
 }
 
 function countChar(message) {
-  for (let i = 0; i < 1000000000; i++) {}
   return message.length;
 }
 

@@ -2,6 +2,7 @@ import CardItem from "./Card";
 import "../styles/CardList.scss";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
+import { useLoaderData, useLocation, useNavigation } from "react-router-dom";
 
 function CardList() {
   const [selectedCardGroup, setSelectedCardGroup] = useState("all");
@@ -16,6 +17,23 @@ function CardList() {
     setSelectedCardGroup(group);
   };
 
+  const cardData = useLoaderData();
+
+  const navigation = useNavigation();
+
+  const breadcrumb = useLocation();
+
+  console.log(breadcrumb);
+
+  useEffect(() => {
+    if (cardData && cardData.products) {
+      setSelectedCards(cardData.products);
+    } else {
+      setError("Data was not fetched");
+    }
+  }, [cardData]);
+
+  /*
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((res) => {
@@ -32,14 +50,15 @@ function CardList() {
         setError(error.toString());
       });
   }, []);
+  */
 
-  useEffect(() => {
-    console.log("Selected Card Group Effect");
-  }, [selectedCardGroup]);
+  // useEffect(() => {
+  //   console.log("Selected Card Group Effect");
+  // }, [selectedCardGroup]);
 
-  useEffect(() => {
-    console.log("DELETION");
-  }, [selectedCards]);
+  // useEffect(() => {
+  //   console.log("DELETION");
+  // }, [selectedCards]);
 
   const filteredCards =
     selectedCardGroup === "all"
@@ -75,18 +94,30 @@ function CardList() {
           Groceries
         </Button>
       </div>
-      {error && <div className="text-danger">Error</div>}
-      <ul className="d-flex flex-wrap m-2 gap-3  list-unstyled">
-        {filteredCards.map((card) => {
-          return (
-            <li key={card.id}>
-              <CardItem card={card} onDelete={deleteCard} />
-            </li>
-          );
-        })}
-      </ul>
+      {navigation.state === "loading" ? (
+        <p className="display-4 m-4">Loading...</p>
+      ) : (
+        <div>
+          {error && <div className="text-danger">Error</div>}
+          <ul className="d-flex flex-wrap m-2 gap-3  list-unstyled">
+            {filteredCards.map((card) => {
+              return (
+                <li key={card.id}>
+                  <CardItem card={card} onDelete={deleteCard} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
+
+export const fetchData = async () => {
+  const response = await fetch("https://dummyjson.com/products");
+  const data = await response.json();
+  return data;
+};
 
 export default CardList;
